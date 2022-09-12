@@ -1,4 +1,5 @@
 #import la lib selenium
+from curses.ascii import US
 from lib2to3.pgen2 import driver
 import selenium
 #import la fonction find_element(By.ID/CLASS_NAME/X_PATH,"")
@@ -107,6 +108,19 @@ def main ():
 
         # on définit l'heure actuelle 
         heure_actuelle = datetime.now().time().hour
+
+
+        #on définit le pays 
+        saisie_pays = user.country
+
+        # if saisie_pays == "US" :
+        #         print('US')
+        # elif saisie_pays == "Allemagne" :
+        #         print('Allemagne')
+        # elif saisie_pays == " Roumanie" :
+        #         print('Roumanie')
+        # elif saisie_pays == "Pays-Bas" :
+        #         print("Pays-Bas")
 
         while stop_musique == False :
 
