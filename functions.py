@@ -1,7 +1,4 @@
 #import la lib selenium
-from curses.ascii import US
-from lib2to3.pgen2 import driver
-from re import I
 import selenium
 #import la fonction find_element(By.ID/CLASS_NAME/X_PATH,"")
 from selenium.webdriver.common.by import By
@@ -16,24 +13,37 @@ import random
 #import les extensions
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
+
 class Utilisateur() :
 
     def __init__(self):
         self.username = ''
         self.password = ''
         self.country = ''
+        self.saisie_mail = ''
+        self.saisie_mdp = ''
+        self.saisie_pays = ''
 
 user = Utilisateur()
 
 def main ():
+        
         #Faire une fonction qui met pause de facon aléatoire 
+
 
         def pause_play():
                 playsong = driver.find_element(By.XPATH, "//button[@class='vnCew8qzJq3cVGlYFXRI']")
                 playsong.click()  
 
+        def Newuser():
+
+                user.username = user.saisie_mail.get()
+                user.password = user.saisie_mdp.get()
+                user.country = user.saisie_pays.get()
 
 
+
+        Newuser()
 
 
         #on ajoute le vpn sur le bot

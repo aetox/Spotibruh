@@ -22,20 +22,16 @@ window.config(background='green')
 user = Utilisateur()
 
 
-
-#Affecte les dimensions de la fenêtre 
-
-
 #Zone de saisie du mail :
 
 label_mail = tkinter.Label (text = "Saisissez votre mail :", bg='green',font=('Proxima Nova',15))
 label_mail.pack()
 
-saisie_mail = tkinter.Entry(font=('Proxima Nova',15))
-saisie_mail.pack()
 
-saisie_mail.focus_set()
+user.saisie_mail = tkinter.Entry(font=('Proxima Nova',15))
+user.saisie_mail.pack()
 
+user.saisie_mail.focus_set()
 
 
 
@@ -43,18 +39,16 @@ saisie_mail.focus_set()
 label_mdp = tkinter.Label (text = "Saisissez votre mot de passe :", bg='green',font=('Proxima Nova',15))
 label_mdp.pack()
 
-mdp = StringVar()
-saisie_mdp = tkinter.Entry(font=('Proxima Nova',15), textvariable= mdp)
 
-
-saisie_mdp.pack()
+user.saisie_mdp = tkinter.Entry(font=('Proxima Nova',15))
+user.saisie_mdp.pack()
 
 
 #Liste des pays
 label_pays = tkinter.Label (text = "Saisissez le VPN de votre Pays :", bg='green',font=('Proxima Nova',15))
 label_pays.pack()
-sasie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Roumanie"],font=('Proxima Nova',15))
-sasie_pays.pack()
+user.saisie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Roumanie"],font=('Proxima Nova',15))
+user.saisie_pays.pack()
 
 submit=Button(window, text="Envoyer",font=('Proxima Nova',20))
 submit.pack()
