@@ -1,6 +1,7 @@
 #import la lib selenium
 from curses.ascii import US
 from lib2to3.pgen2 import driver
+from re import I
 import selenium
 #import la fonction find_element(By.ID/CLASS_NAME/X_PATH,"")
 from selenium.webdriver.common.by import By
@@ -110,56 +111,80 @@ def main ():
         heure_actuelle = datetime.now().time().hour
 
 
-        #on définit le pays 
-        saisie_pays = user.country
-
-        # if saisie_pays == "US" :
-        #         print('US')
-        # elif saisie_pays == "Allemagne" :
-        #         print('Allemagne')
-        # elif saisie_pays == " Roumanie" :
-        #         print('Roumanie')
-        # elif saisie_pays == "Pays-Bas" :
-        #         print("Pays-Bas")
 
         while stop_musique == False :
 
-                if heure_actuelle >= 7 and heure_actuelle <= 21  :
+                #En fonction du choix du pays, une plage horaire d'écoute est définie.
 
-                        # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
-                        time_random = random.randint(10, 20)
-                        time.sleep(time_random)
-                        pause_play()
+                if user.country == "US" : 
 
-                        #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
-                        time_random = random.randint(1, 3)
-                        time.sleep(time_random)
-                        pause_play()
 
-                else :
-                        print('Trop tard')
-        
+                        if heure_actuelle >= 1 and heure_actuelle <= 15 :
 
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+                
+                elif user.country == "Allemagne " or user.country == "Pays-Bas":
+                        
+                        if heure_actuelle >= 7 and heure_actuelle <= 21 :
+
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+
+                elif user.country == "Roumanie" :
+                        
+                        if heure_actuelle >= 8 and heure_actuelle <= 22 :
+
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+                
 
 
 
 #**************************
-#Derniere erreur :
-#  File "c:\Users\Dimitri\Desktop\Dimitri\python\bot_spotify\functions.py", line 61, in main
-#    username_mail = user.username
-#AttributeError: 'Utilisateur' object has no attribute 'username'
 #Cahier de Charges
 # - Se connecte / ok
 # - Lance une musique / ok
 # - Coupe et remet la musique de façon aléatoire / ok 
 # - Ajoute un VPN différent à chaque bot : https://www.youtube.com/watch?v=Fx1hbZMVS7k / ok 
 # - Voir si on peut récupérer l'heure actuelle afin de couper la musique la nuit et qu'un autre le lance le jour. /ok
-# - Définir les horaires en fonctions des différents pays des VPN 
-#       - US : -6h de France
-#       - Roumanie : +1h de France
-#       - Allemagne : Même que France
-#       - Pays-Bas : Même que France
+# - Définir les horaires en fonctions des différents pays des VPN /ok
+#       - US : -6h de France /ok
+#       - Roumanie : +1h de France /ok
+#       - Allemagne : Même que France /ok
+#       - Pays-Bas : Même que France /ok 
 # - Mettre 2 Bot aux US qui écoutent pendant que les 2 autres sont en pause et inversement
-# - Penser à une possibilité d'entrer différent mail/mdp
-# - Dans le logiciel mettre une liste déroulante et si on choisit un pays on aura l'ecoute de ce pays
+# - Penser à une possibilité d'entrer différent mail/mdp /ok
+# - Dans le logiciel mettre une liste déroulante et si on choisit un pays on aura l'ecoute de ce pays /ok
+# - Reussir à récuperer le input de tkinter
 #**************************
