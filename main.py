@@ -7,8 +7,27 @@ from tkinter import *
 import tkinter
 from turtle import Screen, bgcolor
 import tkinter.ttk as ttk
-from functions import main
-from functions import Utilisateur
+
+
+
+#import la lib selenium
+import tkinter
+import selenium
+#import la fonction find_element(By.ID/CLASS_NAME/X_PATH,"")
+from selenium.webdriver.common.by import By
+#import la fonction pour lancer le google automatisé
+from selenium import webdriver
+#import time afin d'ajouter des temps de repo
+import time
+#on importe la librairie qui permet d'avoir l'heure actuelle
+from datetime import datetime
+#import random pour mettre des temps de pause aléatoire
+import random
+#import les extensions
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+#import tkinter
+from tkinter import Tk
+
 
 #on crée la fenetre
 window = Tk()
@@ -19,18 +38,186 @@ window.minsize(480,360)
 window.config(background='green')
 
 
-user = Utilisateur()
+def main ():
+        
+        #Faire une fonction qui met pause de facon aléatoire 
+
+
+        def pause_play():
+                playsong = driver.find_element(By.XPATH, "//button[@class='vnCew8qzJq3cVGlYFXRI']")
+                playsong.click()  
+
+
+
+
+        #on ajoute le vpn sur le bot
+        chrome_options = ChromeOptions()
+        chrome_options.add_extension('VPN.crx')
+
+        # on définit notre driver sur chrome car on utilise ça
+        driver = webdriver.Chrome(options=chrome_options)
+
+        #on définit l'url afin de pouvoir la changer si on veut
+        url_google = 'https://www.google.com/'
+        url_spotify = 'https://accounts.spotify.com/fr/login?continue=https%3A%2F%2Fopen.spotify.com%2F'
+
+        #lance chrome avec l'url
+        driver.get(url_spotify)
+
+        time.sleep(10)
+
+
+
+        #Connexion*************************
+
+                # Insère le mail dans la case login    
+
+        #username_mail = "arnaudsacepee210@gmail.com"
+        #username_mail = "dimitri.kakapolas@gmail.com"
+        username_mail = username_get
+
+        username = driver.find_element(By.ID,"login-username")
+        username.send_keys(username_mail)
+
+                # Insère le mdp dans la case mdp  
+
+        #username_password = "Dimieva04+"
+        #username_password = "Olympiakos07+"
+        username_password = password
+
+        username = driver.find_element(By.ID,"login-password")
+        username.send_keys(username_password)
+
+                # Clique sur le bouton connexion
+
+        connexion = driver.find_element(By.XPATH,"//button[@data-testid='login-button']")
+        connexion.click()
+
+        #***********************************
+
+
+        # Met un timeur de 10 secondes avant que la prochaine fonction soit excécuté, ce qui permet d'attendre que la page charge
+
+        time.sleep(20)
+
+        # Clique sur accepter les cookies
+
+        acceptcookie = driver.find_element(By.XPATH, "//button[@id='onetrust-accept-btn-handler']")
+        acceptcookie.click()
+
+        #***********************************
+        #Lecture
+        # Clique sur titre liké 
+
+        likesong = driver.find_element(By.CLASS_NAME, 'r9YzlaAPnM2LGK97GSfa')
+        likesong.click()
+
+        time.sleep(5)
+        
+        #clique sur le gros bouton play 
+
+        playsong = driver.find_element(By.XPATH, "//button[@class='Button-qlcn5g-0 kgFBvD']")
+        playsong.click()
+        time.sleep(3)
+        playsong = driver.find_element(By.XPATH, "//button[@class='Button-qlcn5g-0 kgFBvD']")
+        playsong.click()
+
+        stop_musique = False 
+
+
+
+
+
+        while stop_musique == False :
+                
+                # on définit l'heure actuelle 
+                heure_actuelle = datetime.now().time().minute
+
+                #En fonction du choix du pays, une plage horaire d'écoute est définie.
+
+                if country == "US" : 
+
+
+                        if heure_actuelle >= 1 and heure_actuelle <= 3 :
+
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+                
+                elif country == "Allemagne " or country == "Pays-Bas":
+                        
+                        if heure_actuelle >= 7 and heure_actuelle <= 21 :
+
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+
+                elif country == "Roumanie" :
+                        
+                        if heure_actuelle >= 8 and heure_actuelle <= 22 :
+
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                time_random = random.randint(10, 20)
+                                time.sleep(time_random)
+                                pause_play()
+
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                time_random = random.randint(1, 3)
+                                time.sleep(time_random)
+                                pause_play()
+
+                        else :
+                                print('Trop tard')
+                
+
+
+
+#**************************
+#Cahier de Charges
+# - Se connecte / ok
+# - Lance une musique / ok
+# - Coupe et remet la musique de façon aléatoire / ok 
+# - Ajoute un VPN différent à chaque bot : https://www.youtube.com/watch?v=Fx1hbZMVS7k / ok 
+# - Voir si on peut récupérer l'heure actuelle afin de couper la musique la nuit et qu'un autre le lance le jour. /ok
+# - Définir les horaires en fonctions des différents pays des VPN /ok
+#       - US : -6h de France /ok
+#       - Roumanie : +1h de France /ok
+#       - Allemagne : Même que France /ok
+#       - Pays-Bas : Même que France /ok 
+# - Mettre 2 Bot aux US qui écoutent pendant que les 2 autres sont en pause et inversement
+# - Penser à une possibilité d'entrer différent mail/mdp /ok
+# - Dans le logiciel mettre une liste déroulante et si on choisit un pays on aura l'ecoute de ce pays /ok
+# - Reussir à récuperer le input de tkinter
+#**************************
+
 
 def Newuser():
 
-    username = user.saisie_mail.get()
-    password = user.saisie_mdp.get()
-    country = user.saisie_pays.get()
+    global username_get, password, country
+
+    username_get = saisie_mail.get()
+    password = saisie_mdp.get()
+    country = saisie_pays.get()
 
     main()
-
-    return user.username, user.password, user.country
-
 
 
 #Zone de saisie du mail :
@@ -39,10 +226,10 @@ label_mail = tkinter.Label (text = "Saisissez votre mail :", bg='green',font=('P
 label_mail.pack()
 
 
-user.saisie_mail = tkinter.Entry(font=('Proxima Nova',15))
-user.saisie_mail.pack()
+saisie_mail = tkinter.Entry(font=('Proxima Nova',15))
+saisie_mail.pack()
 
-user.saisie_mail.focus_set()
+saisie_mail.focus_set()
 
 
 
@@ -51,15 +238,15 @@ label_mdp = tkinter.Label (text = "Saisissez votre mot de passe :", bg='green',f
 label_mdp.pack()
 
 
-user.saisie_mdp = tkinter.Entry(font=('Proxima Nova',15))
-user.saisie_mdp.pack()
+saisie_mdp = tkinter.Entry(font=('Proxima Nova',15))
+saisie_mdp.pack()
 
 
 #Liste des pays
 label_pays = tkinter.Label (text = "Saisissez le VPN de votre Pays :", bg='green',font=('Proxima Nova',15))
 label_pays.pack()
-user.saisie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Roumanie"],font=('Proxima Nova',15))
-user.saisie_pays.pack()
+saisie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Roumanie"],font=('Proxima Nova',15))
+saisie_pays.pack()
 
 
 submit=Button(window, text="Envoyer",font=('Proxima Nova',20))
