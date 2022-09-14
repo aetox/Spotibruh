@@ -1,4 +1,5 @@
 #import la lib selenium
+import tkinter
 import selenium
 #import la fonction find_element(By.ID/CLASS_NAME/X_PATH,"")
 from selenium.webdriver.common.by import By
@@ -12,10 +13,11 @@ from datetime import datetime
 import random
 #import les extensions
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+#import tkinter
+from tkinter import Tk
 
 
-class Utilisateur() :
-
+class Utilisateur():
     def __init__(self):
         self.username = ''
         self.password = ''
@@ -27,6 +29,7 @@ class Utilisateur() :
 user = Utilisateur()
 
 def main ():
+        print(user.username)
         
         #Faire une fonction qui met pause de facon aléatoire 
 
@@ -35,15 +38,7 @@ def main ():
                 playsong = driver.find_element(By.XPATH, "//button[@class='vnCew8qzJq3cVGlYFXRI']")
                 playsong.click()  
 
-        def Newuser():
 
-                user.username = user.saisie_mail.get()
-                user.password = user.saisie_mdp.get()
-                user.country = user.saisie_pays.get()
-
-
-
-        Newuser()
 
 
         #on ajoute le vpn sur le bot

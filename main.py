@@ -21,6 +21,17 @@ window.config(background='green')
 
 user = Utilisateur()
 
+def Newuser():
+
+    username = user.saisie_mail.get()
+    password = user.saisie_mdp.get()
+    country = user.saisie_pays.get()
+
+    main()
+
+    return user.username, user.password, user.country
+
+
 
 #Zone de saisie du mail :
 
@@ -50,9 +61,11 @@ label_pays.pack()
 user.saisie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Roumanie"],font=('Proxima Nova',15))
 user.saisie_pays.pack()
 
+
 submit=Button(window, text="Envoyer",font=('Proxima Nova',20))
 submit.pack()
-submit.config(command=main)
+submit.config(command=Newuser)
+
 
 #Loop qui excécute la fenetre
 
