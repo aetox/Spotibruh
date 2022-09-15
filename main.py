@@ -74,7 +74,7 @@ def main ():
 
         #username_mail = "arnaudsacepee210@gmail.com"
         #username_mail = "dimitri.kakapolas@gmail.com"
-        username_mail = username_get
+        username_mail = mail
 
         username = driver.find_element(By.ID,"login-username")
         username.send_keys(username_mail)
@@ -131,14 +131,14 @@ def main ():
         while stop_musique == False :
                 
                 # on définit l'heure actuelle 
-                heure_actuelle = datetime.now().time().minute
+                heure_actuelle = datetime.now().time().hour
 
                 #En fonction du choix du pays, une plage horaire d'écoute est définie.
 
                 if country == "US" : 
 
 
-                        if heure_actuelle >= 1 and heure_actuelle <= 3 :
+                        if heure_actuelle >= 7 and heure_actuelle <= 21 :
 
                                 # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
                                 time_random = random.randint(10, 20)
@@ -211,9 +211,9 @@ def main ():
 
 def Newuser():
 
-    global username_get, password, country
+    global mail, password, country
 
-    username_get = saisie_mail.get()
+    mail = saisie_mail.get()
     password = saisie_mdp.get()
     country = saisie_pays.get()
 
