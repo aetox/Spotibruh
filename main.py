@@ -1,10 +1,14 @@
 #on importe la librairie tkinter pour avoir la fonction graphique
 from cProfile import label
+from cgi import test
 from cmath import exp
 from http.client import SWITCHING_PROTOCOLS
+from lib2to3.pgen2.token import LESS
 from operator import sub
+from sqlite3 import Row
 from tkinter import *
 import tkinter
+from tkinter.tix import COLUMN
 from turtle import Screen, bgcolor
 import tkinter.ttk as ttk
 
@@ -27,6 +31,8 @@ import random
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 #import tkinter
 from tkinter import Tk
+#import pillow, permet d'ajouter une image dans tkinter
+from PIL import ImageTk, Image  
 
 
 #on crée la fenetre
@@ -220,6 +226,19 @@ def Newuser():
     main()
 
 
+# logo en haut à gauche
+image1 = Image.open("img/spo.png")
+logo = PhotoImage(image1, height=80, width=80)
+
+label1 = tkinter.Label(image=logo)
+label1.image = logo
+
+label1.place(x=0, y=0)
+
+
+label_title = tkinter.Label (text = "SPOTIBRUH", bg='green',font=('Proxima Nova',15))
+label_title.grid(row=0, column=1)
+
 #Zone de saisie du mail :
 
 label_mail = tkinter.Label (text = "Saisissez votre mail :", bg='green',font=('Proxima Nova',15))
@@ -249,9 +268,11 @@ saisie_pays = ttk.Combobox(window, values=["Allemagne", "US", "Pays-Bas", "Rouma
 saisie_pays.pack()
 
 
-submit=Button(window, text="Envoyer",font=('Proxima Nova',20))
-submit.pack()
-submit.config(command=Newuser)
+# Créer un objet photoimage pour utiliser l'image
+photo = PhotoImage(file = r"img/spo_button.png", height=40, width= 40) 
+# Ajouter l'image dans le bouton 
+Button(window,text= 'Se connecter', image=photo, compound=LEFT, command=Newuser).pack(side=TOP)
+
 
 
 #Loop qui excécute la fenetre
