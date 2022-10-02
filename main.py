@@ -78,17 +78,13 @@ def main ():
 
                 # Insère le mail dans la case login    
 
-        #username_mail = "arnaudsacepee210@gmail.com"
-        #username_mail = "dimitri.kakapolas@gmail.com"
         username_mail = mail
 
         username = driver.find_element(By.ID,"login-username")
         username.send_keys(username_mail)
 
                 # Insère le mdp dans la case mdp  
-
-        #username_password = "Dimieva04+"
-        #username_password = "Olympiakos07+"
+                
         username_password = password
 
         username = driver.find_element(By.ID,"login-password")
@@ -104,12 +100,17 @@ def main ():
 
         # Met un timeur de 10 secondes avant que la prochaine fonction soit excécuté, ce qui permet d'attendre que la page charge
 
-        time.sleep(20)
+        time.sleep(80)
 
         # Clique sur accepter les cookies
 
-        acceptcookie = driver.find_element(By.XPATH, "//button[@id='onetrust-accept-btn-handler']")
-        acceptcookie.click()
+        if country == 'US' :
+                acceptcookie = driver.find_element(By.XPATH, '//button[@class="onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon"]')
+                acceptcookie.click()
+        else :
+                acceptcookie = driver.find_element(By.XPATH, "//button[@id='onetrust-accept-btn-handler']")
+                acceptcookie.click()
+
 
         #***********************************
         #Lecture
@@ -118,20 +119,10 @@ def main ():
         likesong = driver.find_element(By.CLASS_NAME, 'r9YzlaAPnM2LGK97GSfa')
         likesong.click()
 
-        time.sleep(5)
+        time.sleep(15)
         
-        #clique sur le gros bouton play 
-
-        playsong = driver.find_element(By.XPATH, "//button[@class='Button-qlcn5g-0 kgFBvD']")
-        playsong.click()
-        time.sleep(3)
-        playsong = driver.find_element(By.XPATH, "//button[@class='Button-qlcn5g-0 kgFBvD']")
-        playsong.click()
-
+    
         stop_musique = False 
-
-
-
 
 
         while stop_musique == False :
@@ -144,17 +135,21 @@ def main ():
                 if country == "US" : 
 
 
-                        if heure_actuelle >= 7 and heure_actuelle <= 21 :
+                        if heure_actuelle >= 1 and heure_actuelle <= 20 :
 
-                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                pause_play()
+                                # on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
                                 time_random = random.randint(10, 20)
+                                print(f'Lecture de {time_random} secondes')
                                 time.sleep(time_random)
+                                
+                                
                                 pause_play()
-
-                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min (1200 secondes) et 30min (1800 secondes)
                                 time_random = random.randint(1, 3)
+                                print(f'Pause de {time_random} secondes')
                                 time.sleep(time_random)
-                                pause_play()
+
 
                         else :
                                 print('Trop tard')
@@ -163,12 +158,12 @@ def main ():
                         
                         if heure_actuelle >= 7 and heure_actuelle <= 21 :
 
-                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min (1200 secondes) et 30min (1800 secondes)
                                 time_random = random.randint(10, 20)
                                 time.sleep(time_random)
                                 pause_play()
 
-                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
+                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
                                 time_random = random.randint(1, 3)
                                 time.sleep(time_random)
                                 pause_play()
@@ -211,7 +206,7 @@ def main ():
 # - Mettre 2 Bot aux US qui écoutent pendant que les 2 autres sont en pause et inversement
 # - Penser à une possibilité d'entrer différent mail/mdp /ok
 # - Dans le logiciel mettre une liste déroulante et si on choisit un pays on aura l'ecoute de ce pays /ok
-# - Reussir à récuperer le input de tkinter
+# - Reussir à récuperer le input de tkinter /ok
 #**************************
 
 
@@ -227,17 +222,10 @@ def Newuser():
 
 
 # logo en haut à gauche
-image1 = Image.open("img/spo.png")
-logo = PhotoImage(image1, height=80, width=80)
-
-label1 = tkinter.Label(image=logo)
-label1.image = logo
-
-label1.place(x=0, y=0)
 
 
 label_title = tkinter.Label (text = "SPOTIBRUH", bg='green',font=('Proxima Nova',15))
-label_title.grid(row=0, column=1)
+label_title.pack()
 
 #Zone de saisie du mail :
 
@@ -284,8 +272,8 @@ window.mainloop()
 # - MDP du compte /ok
 # - Liste des différents pays /ok
 # - Bouton submit /ok 
-# - Récupérer ces infos
-# - Bouton submit lance chrome
+# - Récupérer ces infos / ok
+# - Bouton submit lance chrome /ok
 #*************************
 
 
