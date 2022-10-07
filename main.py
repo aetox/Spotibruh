@@ -2,6 +2,7 @@
 from cProfile import label
 from cgi import test
 from cmath import exp
+from glob import glob
 from http.client import SWITCHING_PROTOCOLS
 from lib2to3.pgen2.token import LESS
 from operator import sub
@@ -52,6 +53,14 @@ def main ():
         def pause_play():
                 playsong = driver.find_element(By.XPATH, "//button[@class='vnCew8qzJq3cVGlYFXRI']")
                 playsong.click()  
+        
+        
+        def ajout_compteur(i):
+                if durée_actuelle == durée_totale :
+                        i += 1 
+                        print(f"Ecoute numéro : {i}")
+                return i
+
 
 
 
@@ -69,6 +78,7 @@ def main ():
 
         #lance chrome avec l'url
         driver.get(url_spotify)
+        print('Lancement de chrome')
 
         time.sleep(10)
 
@@ -95,12 +105,18 @@ def main ():
         connexion = driver.find_element(By.XPATH,"//button[@data-testid='login-button']")
         connexion.click()
 
+        print(f"Utilisateur : {mail}")
+        print(f"Password : {password}")
+        print(f"Pays : {country}")
+
         #***********************************
 
 
         # Met un timeur de 10 secondes avant que la prochaine fonction soit excécuté, ce qui permet d'attendre que la page charge
-
-        time.sleep(80)
+        
+        print('Pause de 40 secondes pour attendre le chargement de la page')
+        time.sleep(40)
+        
 
         # Clique sur accepter les cookies
 
@@ -118,10 +134,30 @@ def main ():
 
         likesong = driver.find_element(By.CLASS_NAME, 'r9YzlaAPnM2LGK97GSfa')
         likesong.click()
+        print("Chargement de la page titre liké")
 
         time.sleep(15)
+
+        lecture_boucle = driver.find_element(By.CLASS_NAME,'//button[@class="Vz6yjzttS0YlLcwrkoUR"]')
+        lecture_boucle.click()
+
+        #************************************
+        #Calculer nb d'ecoute 
+
+        durée_actuelle = driver.find_element(By.XPATH, "//div[@class='Type__TypeElement-goli3j-0 bjvopG playback-bar__progress-time-elapsed']")
+        durée_actuelle_content = durée_actuelle.get_attribute('innerHTML')
+        print (durée_actuelle_content.strip())
+
+        durée_totale = driver.find_element(By.XPATH, "//div[@class='Type__TypeElement-goli3j-0 bjvopG npFSJSO1wsu3mEEGb5bh']")
+        durée_totale_content = durée_totale.get_attribute('innerHTML')
+        print (durée_totale_content.strip())
+
+        ecoute_total = 0
+
+        #************************************
+
         
-    
+        
         stop_musique = False 
 
 
@@ -129,24 +165,29 @@ def main ():
                 
                 # on définit l'heure actuelle 
                 heure_actuelle = datetime.now().time().hour
+                print(f"Il est {heure_actuelle}h.")
+                
+                print("Pause dans boucle while de 10 secondes")
+
+                time.sleep(10)
 
                 #En fonction du choix du pays, une plage horaire d'écoute est définie.
 
                 if country == "US" : 
 
 
-                        if heure_actuelle >= 1 and heure_actuelle <= 20 :
+                        if heure_actuelle >= 1 and heure_actuelle <= 15 :
 
                                 pause_play()
                                 # on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
-                                time_random = random.randint(10, 20)
+                                time_random = random.randint(7200, 10800)
                                 print(f'Lecture de {time_random} secondes')
                                 time.sleep(time_random)
                                 
                                 
                                 pause_play()
                                 # on définit le temps de pause en seconde de façon aléatoire entre 20min (1200 secondes) et 30min (1800 secondes)
-                                time_random = random.randint(1, 3)
+                                time_random = random.randint(1200, 1800)
                                 print(f'Pause de {time_random} secondes')
                                 time.sleep(time_random)
 
@@ -158,15 +199,19 @@ def main ():
                         
                         if heure_actuelle >= 7 and heure_actuelle <= 21 :
 
+                                pause_play()
+                                # on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
+                                time_random = random.randint(7200, 10800)
+                                print(f'Lecture de {time_random} secondes')
+                                time.sleep(time_random)
+                                
+                                
+                                pause_play()
                                 # on définit le temps de pause en seconde de façon aléatoire entre 20min (1200 secondes) et 30min (1800 secondes)
-                                time_random = random.randint(10, 20)
+                                time_random = random.randint(1200, 1800)
+                                print(f'Pause de {time_random} secondes')
                                 time.sleep(time_random)
-                                pause_play()
 
-                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
-                                time_random = random.randint(1, 3)
-                                time.sleep(time_random)
-                                pause_play()
 
                         else :
                                 print('Trop tard')
@@ -175,15 +220,19 @@ def main ():
                         
                         if heure_actuelle >= 8 and heure_actuelle <= 22 :
 
-                                # on définit le temps de pause en seconde de façon aléatoire entre 20min et 30min
-                                time_random = random.randint(10, 20)
-                                time.sleep(time_random)
                                 pause_play()
+                                # on définit le temps d'écoute en seconde de façon aléatoire entre 2h (7200 secondes) et 3h (10800 secondes)
+                                time_random = random.randint(7200, 10800)
+                                print(f'Lecture de {time_random} secondes')
+                                time.sleep(time_random)
+                                
+                                
+                                pause_play()
+                                # on définit le temps de pause en seconde de façon aléatoire entre 20min (1200 secondes) et 30min (1800 secondes)
+                                time_random = random.randint(1200, 1800)
+                                print(f'Pause de {time_random} secondes')
+                                time.sleep(time_random)
 
-                                #on définit le temps d'écoute en seconde de façon aléatoire entre 2h et 3h
-                                time_random = random.randint(1, 3)
-                                time.sleep(time_random)
-                                pause_play()
 
                         else :
                                 print('Trop tard')
@@ -277,3 +326,9 @@ window.mainloop()
 #*************************
 
 
+
+
+#*********************************
+#Fonction compteur à tester 
+# Activer la lecture en boucle !!!!!!!! suis trop con zebi   /ok
+# mettre le compteur d'ecoute dans la boucle dans la boucle constante
