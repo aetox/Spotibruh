@@ -138,8 +138,8 @@ def main ():
 
         time.sleep(15)
 
-        lecture_boucle = driver.find_element(By.CLASS_NAME,'//button[@class="Vz6yjzttS0YlLcwrkoUR"]')
-        lecture_boucle.click()
+        # lecture_boucle = driver.find_element(By.CLASS_NAME,'//button[@class="Vz6yjzttS0YlLcwrkoUR"]')
+        # lecture_boucle.click()
 
         #************************************
         #Calculer nb d'ecoute 
